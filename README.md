@@ -3,7 +3,7 @@ Make political phone calls easier by finding an online partner
 
 # Summary
 
-Phone calls to elected representatives are far more effective than online petitions, but picking up the phone can be intimidating, especially as a first-timer. PhoneFriend lets you find an accountability partner who is available during times you specify, and sends you a video chat link to connect with that person online. With your partner looking on and supporting you, you'll each make your calls in real time. Ten minutes and mission accomplished!
+Phone calls to elected representatives are far more effective than online petitions, but picking up the phone can be intimidating, especially as a first-timer. PhoneFriend lets you find an accountability partner who is available during times you specify, and sends you a video chat appointment to connect with that person online. With your partner looking on and supporting you, you'll each make your calls in real time. Ten minutes and mission accomplished!
 
 # Problem
 
@@ -12,10 +12,6 @@ Making phone calls sucks.
 # Solution
 
 It's easier with a friend.
-
-# Quote from You
-
-
 
 # How to Get Started
 
