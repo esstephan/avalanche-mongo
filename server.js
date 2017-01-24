@@ -14,7 +14,7 @@ mongoose.connect('mongodb://pf_admin:phone4friend@ds057176.mlab.com:57176/phone-
 
 // require('./config/middleware.js')(app, express);
 // require('./config/routes.js')(app, express);
-app.use(express.static('client'));
+app.use(express.static('__dirname + /client'));
 app.use('/node_modules', express.static('node_modules'));
 app.use(bodyParser.json());
 
