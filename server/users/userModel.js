@@ -6,4 +6,4 @@ var UserSchema = new mongoose.Schema({
   name: String
 });
 
-module.exports = mongoose.model('Link', LinkSchema);
+module.exports = mongoose.model('User', UserSchema);

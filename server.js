@@ -10,11 +10,12 @@ var app = express();
 
 // configuration =================
 
-//mongoose.connect('mongodb://localhost/phone-friend');
+mongoose.connect('mongodb://pf_admin:phone4friend@ds057176.mlab.com:57176/phone-friend_users');
 
 // require('./config/middleware.js')(app, express);
 // require('./config/routes.js')(app, express);
-
+app.use(express.static('client'));
+app.use('/node_modules', express.static('node_modules'));
 app.use(bodyParser.json());
 
 // listen (start app with node server.js) =========
@@ -24,9 +25,8 @@ app.listen(port, function(){
   console.log("App is running on port" + port);
 });
 
-
 app.get('/', function(req, res){
-  res.send('hello world');
+  res.redirect('/index.html');
 });
 // export =====
 
