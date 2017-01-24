@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8" />
+    <title>Phone-friend</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src = "app.js"></script>
+  </head>
+  <body>
+    <h1>PhoneFriend - making phone calls easier</h1>
+
+ <div>
+      <form name = 'signup' ng-controller = 'SignUpController' ng-submit = "addUser()">
+      Your name <input type = 'text' placeholder="Enter your name" ng-model="user.name">
+      Your email <input type = 'email' placeholder = "Enter your email" ng-model ="user.email">
+
+      <h2>Select all times you are available (Pacific time)</h2>
+
+      <div ng-repeat="time in times" ng-model="timeOfDay" class="checkbox">
+            <label><input name="availTime" type="checkbox" value={{time.hour}}>{{time.hour}}</label>
+      </div>
+
+      <button type = 'submit'>Submit to find a partner</button>
+      </form>
+  </div>
+  <hr>
+<!--   <div name = 'partner' ng-controller = "PartnerController" ng-model="partner-name">Your partner is: {{partner-name}}</div> -->
+    <hr>
+    <a href = "http://echothroughthefog.cordeliadillon.com/post/153393286626/how-to-call-your-reps-when-you-have-social-anxiety">helpful hints</a>
+    <hr>
+  </body>
+</html>
+
+
+
+
