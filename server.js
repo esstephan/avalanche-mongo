@@ -18,9 +18,12 @@ var app = express();
 app.use(bodyParser.json());
 
 // listen (start app with node server.js) =========
+var port = process.env.PORT || 8080;
 
-app.listen(8000);
-console.log("App listening on port 8000");
+app.listen(port, function(){
+  console.log("App is running on port" + port);
+});
+
 
 app.get('/', function(req, res){
   res.send('hello world');
