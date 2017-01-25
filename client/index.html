@@ -11,7 +11,7 @@
     <h1>PhoneFriend - making phone calls easier</h1>
 
  <div>
-      <form name = 'signup' ng-controller = 'SignUpController' ng-submit = "addUser()">
+      <form name = 'signup' ng-controller = 'SignUpController' ng-submit = "addUser(user)">
       Your name <input type = 'text' placeholder="Enter your name" ng-model="user.name">
       Your email <input type = 'email' placeholder = "Enter your email" ng-model ="user.email">
 
@@ -24,6 +24,15 @@
       <button type = 'submit'>Submit to find a partner</button>
       </form>
   </div>
+  <hr>
+  <form name = "userfetchtest" ng-controller = "TestController" ng-submit = "getAllUsers()" ng-model="users">
+      <button type = 'submit'>Retrieve all users</button>
+
+      <div ng-repeat="user in users" ng-model="userinfo" name="user name" value={{user.name}}>{{user.name}}</div>
+
+
+      <div name = "testdata">{{users}}</div>
+      </form>
   <hr>
 <!--   <div name = 'partner' ng-controller = "PartnerController" ng-model="partner-name">Your partner is: {{partner-name}}</div> -->
     <hr>
