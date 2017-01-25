@@ -25,13 +25,12 @@
       </form>
   </div>
   <hr>
-  <form name = "userfetchtest" ng-controller = "TestController" ng-submit = "getAllUsers()" ng-model="users">
+  <form name = "userfetchtest" ng-controller = "TestController" ng-submit = "getAllUsers()" ng-model="users.data">
       <button type = 'submit'>Retrieve all users</button>
 
-      <div ng-repeat="user in users" ng-model="userinfo" name="user name" value={{user.name}}>{{user.name}}</div>
+      <div> <h2>Your Potential Partners <h2></div>
+      <div ng-repeat="user in users.data" ng-model="userinfo" name="user name" value={{user.name}}><b>Name:</b> {{user.name}} <b>  Email: </b> {{user.email}}</div>
 
-
-      <div name = "testdata">{{users}}</div>
       </form>
   <hr>
 <!--   <div name = 'partner' ng-controller = "PartnerController" ng-model="partner-name">Your partner is: {{partner-name}}</div> -->

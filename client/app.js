@@ -34,7 +34,7 @@ app.controller('TestController', function TestController (
     })
     .then(function(resp) {
       $scope.users=resp;
-      console.log($scope.users);
+      console.log($scope.users.data);
     });
   };
 })
