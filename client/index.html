@@ -2,34 +2,28 @@
 <html ng-app='app'>
   <head>
     <meta charset="utf-8" />
-    <title>Phone-friend</title>
+    <title>Avalanche</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Bootstrap basics + theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
     <script src = "app.js"></script>
+    <script src = "userController.js"></script>
   </head>
   <body>
-    <h1>PhoneFriend - making phone calls easier</h1>
+    <h1>Avalanche</h1>
 
- <div>
-      <form name = 'signup' ng-controller = 'SignUpController' ng-submit = "addUser(user)">
-      Your name <input type = 'text' placeholder="Enter your name" ng-model="user.name">
-      Your email <input type = 'email' placeholder = "Enter your email" ng-model ="user.email">
+ <div class= "row" ng-view></div>
 
-      <h2>Select all times you are available (Pacific time)</h2>
-
-      <div ng-repeat="time in times" ng-model="timeOfDay" class="checkbox">
-            <label><input name="availTime" type="checkbox" value={{time.hour}}>{{time.hour}}</label>
-      </div>
-
-      <button type = 'submit'>Submit to find a partner</button>
-      </form>
-  </div>
   <hr>
   <form name = "userfetchtest" ng-controller = "TestController" ng-submit = "getAllUsers()" ng-model="users.data">
       <button type = 'submit'>Retrieve all users</button>
 
       <div> <h2>Your Potential Partners <h2></div>
-      <div ng-repeat="user in users.data" ng-model="userinfo" name="user name" value={{user.name}}><b>Name:</b> {{user.name}} <b>  Email: </b> {{user.email}}</div>
+      <div ng-repeat="user in users.data" ng-model="userinfo" name="user name" value={{user.name}}><b>Name:</b> {{user.name}} <b>  Email: </b> {{user.email}}  <b>Available Time: </b>{{user.times}}</div>
 
       </form>
   <hr>
