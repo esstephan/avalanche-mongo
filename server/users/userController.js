@@ -7,16 +7,17 @@ module.exports = {
 newUser : function(req, res) {
   var username = req.body.username;
   var email = req.body.email;
+  var times = req.body.times;
   var newUser = {
-    id: 2,
     name: username,
-    email: email
+    email: email,
+    times: times,
   };
   createUser(newUser)
   .then(function(){
     res.end("sending response");
   })
-  .fail(function(error){
+  .catch(function(error){
     res.end("error: " + error);
   });
 

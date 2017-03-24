@@ -25,7 +25,8 @@ app.use(bodyParser.json());
 var fake = new User;
 fake.id = 1;
 fake.name = "Ada";
-fake.email = "ada@gmail.com"
+fake.email = "ada@gmail.com";
+fake.times = "7pm";
 
 // //save fake user
 fake.save(function(err){
@@ -46,6 +47,18 @@ app.listen(port, function(){
 
 app.get('/', function(req, res){
   res.redirect('/index.html');
+});
+
+app.post('/api/users', function(req, res){
+  var user = new User({ name: req.body.username, email: req.body.email, times: req.body.times });
+    user.save(function (err, user) {
+      if (err) {
+        return console.error(err);
+      } else {
+        console.log ("successfully saved ", user);
+        res.end(user);
+    }
+  });
 });
 
 var retrieveAllUsers = Q.nbind(User.find, User);

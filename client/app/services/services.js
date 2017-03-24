@@ -11,7 +11,7 @@ angular.module('app.services', [])
     });
   };
 
-  var addOne = function (urlLink) {
+  var addUser = function (user) {
     return $http({
       method: 'POST',
       url: '/api/users',

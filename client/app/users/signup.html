@@ -1,0 +1,86 @@
+<div class = "container-fluid" ng-controller = "SignupController">
+  Sign up for a partner
+  <form>
+    <div class = "row">
+      <div class = ".col-md-8">
+        <input type = "text" ng-model = 'user.name'>Name you would like your partner to see
+        <input type = "text" ng-model = 'user.email'>Email address
+        <input type = "text" ng-model = 'user.password'>Password of 8 or more characters
+        <input type = "text" ng-model = 'user.notes'>Notes for your partner
+        <button type = "submit" ng-click="addUser()">Find a match!</button>
+      </div>
+      <div class = ".col-md-4">
+        <h2>Your availability</h2>
+        <h2>Your Time Zone</h2>
+        <select ng-model = 'timezone'>
+          <option value="-3">Pacific</option>
+          <option value="-2">Mountain</option>
+          <option value="-1">Central</option>
+          <option value="0">Eastern</option>
+        </select>
+        <h3>Choose up to 10 time slots during which you are available for at least 15 minutes.<br>
+      </div>
+    <div class = "row">
+      <div class = ".col-md-2">
+        <h3>Monday</h3>
+        <input type = "radio" ng-model = 'user.times.Mon8'>8-9am
+        <input type = "radio" ng-model = 'user.times.Mon9'>9-10am
+        <input type = "radio" ng-model = 'user.times.Mon10'>10-11am
+        <input type = "radio" ng-model = 'user.times.Mon11'>11am-12pm
+        <input type = "radio" ng-model = 'user.times.Mon12'>12pm-1pm
+        <input type = "radio" ng-model = 'user.times.Mon13'>1pm-2pm
+        <input type = "radio" ng-model = 'user.times.Mon14'>2pm-3pm
+        <input type = "radio" ng-model = 'user.times.Mon15'>3pm-4pm
+        <input type = "radio" ng-model = 'user.times.Mon16'>4pm-5pm
+      </div>
+      <div class = ".col-md-2">
+        <h3>Tuesday</h3>
+        <input type = "radio" ng-model = 'Tues8'>8-9am
+        <input type = "radio" ng-model = 'Tues9'>9-10am
+        <input type = "radio" ng-model = 'Tues10'>10-11am
+        <input type = "radio" ng-model = 'Tues11'>11am-12pm
+        <input type = "radio" ng-model = 'Tues12'>12pm-1pm
+        <input type = "radio" ng-model = 'Tues13'>1pm-2pm
+        <input type = "radio" ng-model = 'Tues14'>2pm-3pm
+        <input type = "radio" ng-model = 'Tues15'>3pm-4pm
+        <input type = "radio" ng-model = 'Tues16'>4pm-5pm
+      </div>
+      <div class = ".col-md-2">
+        <h3>Wednesday</h3>
+        <input type = "radio" ng-model = 'Wed8'>8-9am
+        <input type = "radio" ng-model = 'Wed9'>9-10am
+        <input type = "radio" ng-model = 'Wed10'>10-11am
+        <input type = "radio" ng-model = 'Wed11'>11am-12pm
+        <input type = "radio" ng-model = 'Wed12'>12pm-1pm
+        <input type = "radio" ng-model = 'Wed13'>1pm-2pm
+        <input type = "radio" ng-model = 'Wed14'>2pm-3pm
+        <input type = "radio" ng-model = 'Wed15'>3pm-4pm
+        <input type = "radio" ng-model = 'Wed16'>4pm-5pm
+      </div>
+      <div class = ".col-md-2">
+        <h3>Thursday</h3>
+        <input type = "radio" ng-model = 'Thurs8'>8-9am
+        <input type = "radio" ng-model = 'Thurs9'>9-10am
+        <input type = "radio" ng-model = 'Thurs10'>10-11am
+        <input type = "radio" ng-model = 'Thurs11'>11am-12pm
+        <input type = "radio" ng-model = 'Thurs12'>12pm-1pm
+        <input type = "radio" ng-model = 'Thurs13'>1pm-2pm
+        <input type = "radio" ng-model = 'Thurs14'>2pm-3pm
+        <input type = "radio" ng-model = 'Thurs15'>3pm-4pm
+        <input type = "radio" ng-model = 'Thurs16'>4pm-5pm
+      </div>
+      <div class = ".col-md-2">
+        <h3>Friday</h3>
+        <input type = "radio" ng-model = 'Fri8'>8-9am
+        <input type = "radio" ng-model = 'Fri9'>9-10am
+        <input type = "radio" ng-model = 'Fri10'>10-11am
+        <input type = "radio" ng-model = 'Fri11'>11am-12pm
+        <input type = "radio" ng-model = 'Fri12'>12pm-1pm
+        <input type = "radio" ng-model = 'Fri13'>1pm-2pm
+        <input type = "radio" ng-model = 'Fri14'>2pm-3pm
+        <input type = "radio" ng-model = 'Fri15'>3pm-4pm
+        <input type = "radio" ng-model = 'Fri16'>4pm-5pm
+      </div>
+    <div>
+  </form>
+</div>
