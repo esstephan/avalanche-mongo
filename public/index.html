@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8" />
+    <title>Avalanche</title>
+
+    <!-- Bootstrap Core CSS and JS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href ="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+
+    <!-- for personal custom styling in the future -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- stylesheet and font for demo footer -->
+    <link rel="stylesheet" href="./css/footer-distributed.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  </head>
+
+  <body>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+  <script src="app.js"></script>
+  <script src="SignUpController.js"></script>
+  <script src="MatchController.js"></script>
+
+
+  <h1>Avalanche</h1>
+  <form method = "GET" action = "#/signup">
+    <input type = "submit" value = "Sign Up">
+  </form>
+  <form method = "GET" action = "#/match">
+    <input type = "submit" value = "See your Matches">
+  </form>
+
+  <!-- the main container to hold all the views -->
+    <div id="main" ng-view>
+
+    </div>
+  <!-- footer -->
+    <footer class="footer-distributed">
+
+    <div class="footer-right">
+
+      <a href="#"><i class="fa fa-facebook"></i></a>
+      <a href="#"><i class="fa fa-twitter"></i></a>
+      <a href="#"><i class="fa fa-linkedin"></i></a>
+      <a href="#"><i class="fa fa-github"></i></a>
+
+    </div>
+
+    <div class="footer-left">
+
+      <p class="footer-links">
+        <a href="#">Home</a>
+        ·
+        <a href="#">About</a>
+        ·
+        <a href="#">Faq</a>
+        ·
+        <a href = "http://echothroughthefog.cordeliadillon.com/post/153393286626/how-to-call-your-reps-when-you-have-social-anxiety">Helpful hints for the shy or nervous</a>
+        ·
+        <a href="#">Contact</a>
+      </p>
+
+      <p>Avalanche &copy; 2017</p>
+    </div>
+
+  </footer>
+
+
+  </body>
+</html>
+
+
+
+
