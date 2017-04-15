@@ -1,4 +1,17 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
   font-family: Arial;
-  background-color: #9999ff;
+  background-color: #99ccff;
+}
+
+.logo {
+  font-size: 60px;
+  color: #ffffff;
+  font-family: 'Pacifico', cursive;
 }
