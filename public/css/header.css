@@ -1,0 +1,55 @@
+.header {
+	background-color: #000000;
+	display: flex;
+	box-sizing: border-box;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	max-height: 160px;
+	text-align: center;
+	margin-left: 0px;
+}
+
+.header-left {
+	flex: 1;
+	text-align: left;
+	margin-left: 10px;
+}
+
+.header-center {
+	flex: 1;
+}
+
+.header-right {
+	display: flex;
+	flex: 1;
+}
+
+/* header links */
+
+.header .header-right a{
+	border-radius: 2px;
+	font-size: 20px;
+	color: #ffffff;
+	padding: 10px;
+	text-decoration: none;
+}
+
+/* If you don't want the header to be responsive, remove these media queries */
+
+@media (max-width: 600px) {
+
+	.header .header-left,
+	.header .header-right{
+		text-align: center;
+	}
+
+	.header .header-right{
+		float: none;
+		margin: 0 auto 20px;
+	}
+
+	.header .header-left p.header-links{
+		line-height: 1.8;
+	}
+}
