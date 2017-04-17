@@ -5,28 +5,27 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-// var mongoose = require('mongoose');
+// fake user data for testing
+var fake = require('./fake.js');
+
 // var User = require('../db/db.js');
 
 // create our app object and tell it to use some middleware
 var app = express();
 app.use(express.static(path.join(process.cwd(), 'public')));
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 
 // create dummy route responses
 app.post('/signup', function(req, res) {
-  res.send("You have signed up!");
+  res.send("signed up " + req.body.name);
 });
 
 app.get('/matches', function (req, res) {
-  res.send("Your matches would be sent here");
+  console.log("Sending fake user data");
+  res.send(fake);
 })
 
-// var fake = new User;
-// fake.id = 1;
-// fake.name = "Ada";
-// fake.email = "ada@gmail.com";
-// fake.times = "7pm";
+
 
 // // //save fake user
 // fake.save(function(err){

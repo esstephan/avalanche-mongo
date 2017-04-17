@@ -1,6 +1,10 @@
 // set up ========================
 
-var app = require('routes.js');
+// require app object and its routing
+var app = require('./routes.js');
+
+// require mongoose to make MongoDB database connection
+var mongoose = require('mongoose');
 
 // listen (start app with node server.js) =========
 var port = process.env.PORT || 3000;
