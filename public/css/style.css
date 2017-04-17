@@ -15,3 +15,18 @@ body {
   color: #ffffff;
   font-family: 'Pacifico', cursive;
 }
+
+.subRow {
+  text-align: left;
+  font: normal 16px sans-serif;
+}
+
+.subButton {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+textarea{
+  width:400px;
+  height:100px;
+}
