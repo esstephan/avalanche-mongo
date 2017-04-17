@@ -16,11 +16,11 @@ angular.module('app.match', [])
      console.log('Getting Users Who Match Your Availability');
     return $http({
       method: 'GET',
-      url: '/api/users',
+      url: '/matches',
     })
     .then(function(resp) {
-      $scope.users=resp;
-      console.log($scope.users.data);
+      $scope.users=resp.data;
+      console.log($scope.users);
     });
   };
 })

@@ -1,86 +1,61 @@
 <div class = "container-fluid" ng-controller = "SignUpController">
-  Sign up for a partner
+  <span width= "45%" ><h2>Sign up for a partner</h2></span>
+  <span width="45%"><button ng-click="getQuote()">Get a Random Quote</button>
+  <h3 ng-show="quoted">Your Quote: "{{quote}}" -- {{quoteAuthor}}</h3>
   <form>
     <div class = "row">
-      <div class = ".col-md-8">
-        <input type = "text" ng-model = 'user.name'>Name you would like your partner to see
-        <input type = "text" ng-model = 'user.email'>Email address
-        <input type = "text" ng-model = 'user.password'>Password of 8 or more characters
-        <input type = "text" ng-model = 'user.notes'>Notes for your partner
-        <button type = "submit" ng-click="addUser()">Find a match!</button>
+      <div>
+      <input type = "text" ng-model = 'user.name'>Name you would like your partner to see
       </div>
-      <div class = ".col-md-4">
-        <h2>Your availability</h2>
-        <h2>Your Time Zone</h2>
-        <select ng-model = 'timezone'>
-          <option value="-3">Pacific</option>
-          <option value="-2">Mountain</option>
-          <option value="-1">Central</option>
-          <option value="0">Eastern</option>
+      <div>
+      <input type = "text" ng-model = 'user.email'>Email address
+      </div>
+      <div>
+      <input type = "text" ng-model = 'user.password'>Password of 8 or more characters
+      </div>
+      <div>
+      <input type = "textarea" ng-model = 'user.notes'>Notes for your partner
+      </div>
+
+      <h2>Your availability</h2>
+
+      <h3>Your Time Zone</h3>
+      <select ng-model = 'timezone'>
+        <option value=0>Pacific</option>
+        <option value=-1>Mountain</option>
+        <option value=-2>Central</option>
+        <option value=-3>Eastern</option>
+      </select>
+
+      <h3>Choose your top three preferred time slots.</h3>
+
+      <div>
+      <h3>First choice</h3>
+        <select ng-options = "time.label for time in times" ng-model = "time1">
         </select>
-        <h3>Choose up to 10 time slots during which you are available for at least 15 minutes.<br>
+        <select ng-options = "day for day in days" ng-model = "day1">
+        </select>
       </div>
-    <div class = "row">
-      <div class = ".col-md-2">
-        <h3>Monday</h3>
-        <input type = "radio" ng-model = 'user.times.Mon8'>8-9am
-        <input type = "radio" ng-model = 'user.times.Mon9'>9-10am
-        <input type = "radio" ng-model = 'user.times.Mon10'>10-11am
-        <input type = "radio" ng-model = 'user.times.Mon11'>11am-12pm
-        <input type = "radio" ng-model = 'user.times.Mon12'>12pm-1pm
-        <input type = "radio" ng-model = 'user.times.Mon13'>1pm-2pm
-        <input type = "radio" ng-model = 'user.times.Mon14'>2pm-3pm
-        <input type = "radio" ng-model = 'user.times.Mon15'>3pm-4pm
-        <input type = "radio" ng-model = 'user.times.Mon16'>4pm-5pm
+
+      <div>
+      <h3>Second choice</h3>
+        <select ng-options = "time.label for time in times" ng-model = "time2">
+        </select>
+        <select ng-options = "day for day in days" ng-model = "day2">
+        </select>
       </div>
-      <div class = ".col-md-2">
-        <h3>Tuesday</h3>
-        <input type = "radio" ng-model = 'Tues8'>8-9am
-        <input type = "radio" ng-model = 'Tues9'>9-10am
-        <input type = "radio" ng-model = 'Tues10'>10-11am
-        <input type = "radio" ng-model = 'Tues11'>11am-12pm
-        <input type = "radio" ng-model = 'Tues12'>12pm-1pm
-        <input type = "radio" ng-model = 'Tues13'>1pm-2pm
-        <input type = "radio" ng-model = 'Tues14'>2pm-3pm
-        <input type = "radio" ng-model = 'Tues15'>3pm-4pm
-        <input type = "radio" ng-model = 'Tues16'>4pm-5pm
+
+      <div>
+      <h3>Third choice</h3>
+        <select ng-options = "time.label for time in times" ng-model = "time3">
+        </select>
+        <select ng-options = "day for day in days" ng-model = "day3">
+        </select>
       </div>
-      <div class = ".col-md-2">
-        <h3>Wednesday</h3>
-        <input type = "radio" ng-model = 'Wed8'>8-9am
-        <input type = "radio" ng-model = 'Wed9'>9-10am
-        <input type = "radio" ng-model = 'Wed10'>10-11am
-        <input type = "radio" ng-model = 'Wed11'>11am-12pm
-        <input type = "radio" ng-model = 'Wed12'>12pm-1pm
-        <input type = "radio" ng-model = 'Wed13'>1pm-2pm
-        <input type = "radio" ng-model = 'Wed14'>2pm-3pm
-        <input type = "radio" ng-model = 'Wed15'>3pm-4pm
-        <input type = "radio" ng-model = 'Wed16'>4pm-5pm
-      </div>
-      <div class = ".col-md-2">
-        <h3>Thursday</h3>
-        <input type = "radio" ng-model = 'Thurs8'>8-9am
-        <input type = "radio" ng-model = 'Thurs9'>9-10am
-        <input type = "radio" ng-model = 'Thurs10'>10-11am
-        <input type = "radio" ng-model = 'Thurs11'>11am-12pm
-        <input type = "radio" ng-model = 'Thurs12'>12pm-1pm
-        <input type = "radio" ng-model = 'Thurs13'>1pm-2pm
-        <input type = "radio" ng-model = 'Thurs14'>2pm-3pm
-        <input type = "radio" ng-model = 'Thurs15'>3pm-4pm
-        <input type = "radio" ng-model = 'Thurs16'>4pm-5pm
-      </div>
-      <div class = ".col-md-2">
-        <h3>Friday</h3>
-        <input type = "radio" ng-model = 'Fri8'>8-9am
-        <input type = "radio" ng-model = 'Fri9'>9-10am
-        <input type = "radio" ng-model = 'Fri10'>10-11am
-        <input type = "radio" ng-model = 'Fri11'>11am-12pm
-        <input type = "radio" ng-model = 'Fri12'>12pm-1pm
-        <input type = "radio" ng-model = 'Fri13'>1pm-2pm
-        <input type = "radio" ng-model = 'Fri14'>2pm-3pm
-        <input type = "radio" ng-model = 'Fri15'>3pm-4pm
-        <input type = "radio" ng-model = 'Fri16'>4pm-5pm
-      </div>
-    <div>
+    </div>
+    <div><p></div>
+    <div class="row subRow">
+    <button type = "submit" ng-click="addUser()">Find a match!</button>
+    </div>
   </form>
 </div>
