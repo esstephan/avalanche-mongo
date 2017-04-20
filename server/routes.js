@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var path = require('path');
 // fake user data for testing
 var fake = require('./fake.js');
+var User = require('./users/userModel.js')
 
 // var User = require('../db/db.js');
 
@@ -17,7 +18,19 @@ app.use(bodyParser.json());
 
 // create dummy route responses
 app.post('/signup', function(req, res) {
-  res.send("signed up " + req.body.name);
+  var newUser = new User ({
+    name: req.body.name,
+    email: req.body.email,
+    times: req.body.times
+  });
+  newUser.save (
+    function(err, data) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send("Created user " + req.body.name);
+      }
+    })
 });
 
 app.get('/matches', function (req, res) {
@@ -25,7 +38,9 @@ app.get('/matches', function (req, res) {
   res.send(fake);
 })
 
+var findMatch = function(user) {
 
+}
 
 // // //save fake user
 // fake.save(function(err){
