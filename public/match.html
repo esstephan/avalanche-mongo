@@ -1,11 +1,22 @@
 <div class = "container-fluid" ng-controller = "MatchController">
-<h1>This is where matches will appear</h1>
+  <div class = "row">
+    <div class = "col-md-6">
+      <h2>This is where matches will appear</h2>
 
-  <div ng-repeat="user in users track by user.id">
-    <p>{{user.name}}</p>
-    <p>{{user.email}}</p>
+      <div ng-repeat="user in users track by user.id">
+        <p><strong>{{user.name}}</p></strong>
+        <p>{{user.email}}</p>
+      </div>
+
+      <button ng-click="getMatchedUsers()">Refresh User Matches</button>
+    </div>
+
+    <div class = "col-md-6">
+      <iframe width="90%" id="appear"></iframe>
+      <h3 ng-show="gotRoom">Your permanent link: www.appear.in{{room}}</h3>
+
+      <button ng-click="generateVideoLink()">Get a new permanent video link</button>
+      <button ng-show="gotRoom" ng-click="saveVideoLink()">I like this one, thanks</button>
+    </div>
   </div>
-
-  <button ng-click="getMatchedUsers()">Refresh User Matches</button>
-
 </div>
