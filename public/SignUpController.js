@@ -6,6 +6,7 @@ angular.module('app.signup', [])
     email: '',
     password: '',
     notes: '',
+    timezone: '',
     times: [
     {pref: 1,
       day: $scope.day1,
@@ -19,7 +20,8 @@ angular.module('app.signup', [])
       day: $scope.day3,
       time: $scope.time3+$scope.timezone,
     }
-    ]
+    ],
+    partner: {},
   };
 
   // times in Pacific Time Zone, from 6am to 5pm

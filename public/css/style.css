@@ -26,7 +26,17 @@ body {
   color: #ffffff;
 }
 
-textarea{
+textarea {
   width:400px;
   height:100px;
+}
+
+iframe {
+  border-top: #c00 1px dotted;
+  border-right: #c00 2px dotted;
+  border-left: #c00 2px dotted;
+  border-bottom: #c00 4px dotted;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  min-height: 400px;
 }

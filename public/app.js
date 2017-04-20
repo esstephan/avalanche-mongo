@@ -1,5 +1,9 @@
 // var http = require('http');
 // var services = angular.module('app.services');
+// require AppearIn for video link
+var AppearIn = window.AppearIn;
+var appearin = new AppearIn;
+
 
 var app = angular.module('app', ['ngRoute', 'app.signup', 'app.match']);
 app.config(function($routeProvider, $locationProvider) {
