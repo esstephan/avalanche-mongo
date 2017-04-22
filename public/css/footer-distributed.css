@@ -5,8 +5,12 @@
 	width: 100%;
 	text-align: left;
 	font: normal 16px sans-serif;
-	padding: 45px 50px;
-	margin-top: 80px;
+	padding: 40px 40px 80px 40px;
+	position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 100px;
 }
 
 .footer-distributed .footer-left p{
