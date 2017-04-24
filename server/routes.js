@@ -9,7 +9,8 @@ var path = require('path');
 var fake = require('./fake.js');
 var User = require('./users/userModel.js')
 
-// var User = require('../db/db.js');
+// database connection
+var db = require('../db/db.js');
 
 // create our app object and tell it to use some middleware
 var app = express();
@@ -21,7 +22,9 @@ app.post('/signup', function(req, res) {
   var newUser = new User ({
     name: req.body.name,
     email: req.body.email,
-    times: req.body.times
+    times: req.body.times,
+    timezone: req.body.timezone,
+    partner: req.body.partner,
   });
   newUser.save (
     function(err, data) {
@@ -34,12 +37,21 @@ app.post('/signup', function(req, res) {
 });
 
 app.get('/matches', function (req, res) {
-  console.log("Sending fake user data");
-  res.send(fake);
-})
+  var currUserId = req.body._id || 0;
+  query = User.find( { "_id" : { $ne: currUserId } } );
+  User.find(function(err, users) {
+    if (err) return console.error(err);
+    console.log("sending all users");
+    res.send(users);
+  });
+});
 
 var findMatch = function(user) {
-
+  var match = false;
+  while (match === false);
+  for (var i=0; i < user.times.length; i++) {
+    User.findOne( {})
+  }
 }
 
 // // //save fake user
