@@ -1,11 +1,12 @@
 <div class = "container-fluid" ng-controller = "MatchController">
   <div class = "row">
     <div class = "col-md-6">
-      <h2>This is where matches will appear</h2>
+      <h2>Potential Calling Partners</h2>
 
-      <div ng-repeat="user in users track by user.id">
-        <p><strong>{{user.name}}</p></strong>
-        <p>{{user.email}}</p>
+      <div ng-repeat="user in users|limitTo:4 track by user._id">
+        <span><h3><strong>{{user.name}}    </strong></h3>
+        <a href="mailto:"+{{user.email}} target="_top">{{user.email}}</a></span>
+        <h4>Timezone: {{user.timezone}}</h4>
       </div>
 
       <button ng-click="getMatchedUsers()">Refresh User Matches</button>
