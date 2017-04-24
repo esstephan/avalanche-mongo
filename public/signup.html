@@ -1,61 +1,75 @@
 <div class = "container-fluid" ng-controller = "SignUpController">
-  <span width= "45%" ><h2>Sign up for a partner</h2></span>
-  <span width="45%"><button ng-click="getQuote()">Get a Random Quote</button>
-  <h3 ng-show="quoted">Your Quote: "{{quote}}" -- {{quoteAuthor}}</h3>
-  <form>
+
+  <!--<div><button ng-click="getQuote()">Get a Random Quote</button></div>
+  <h3 ng-show="quoted">Your Quote: "{{quote}}" -- {{quoteAuthor}}</h3>-->
+
     <div class = "row">
-      <div>
-      <input type = "text" ng-model = 'user.name'>Name you would like your partner to see
-      </div>
-      <div>
-      <input type = "text" ng-model = 'user.email'>Email address
-      </div>
-      <div>
-      <input type = "text" ng-model = 'user.password'>Password of 8 or more characters
-      </div>
-      <div>
-      <input type = "textarea" ng-model = 'user.notes'>Notes for your partner
+    <!-- spacer column-->
+      <div class = "col-md-2"></div>
+
+    <!--main form content-->
+
+      <form>
+      <!-- column one -->
+      <div class = "col-md-5">
+        <h2>Sign up for a partner</h2>
+        <div>
+        <input type = "text" ng-model = 'user.name'>Name you would like your partner to see
+        </div>
+        <div>
+        <input type = "text" ng-model = 'user.email'>Email address
+        </div>
+        <div>
+        <input type = "password" ng-model = 'user.password'>Password of 8 or more characters
+        </div>
+        <div>
+        <input type = "textarea" ng-model = 'user.notes'>Notes for your partner
+        </div>
       </div>
 
-      <h2>Your availability</h2>
+      <!--column two -->
+      <div class = "col-md-5">
 
-      <h3>Your Time Zone</h3>
-      <select ng-model = 'timezone'>
-        <option value=0>Pacific</option>
-        <option value=-1>Mountain</option>
-        <option value=-2>Central</option>
-        <option value=-3>Eastern</option>
-      </select>
+        <h2>Your availability</h2>
 
-      <h3>Choose your top three preferred time slots.</h3>
-
-      <div>
-      <h3>First choice</h3>
-        <select ng-options = "time.label for time in times" ng-model = "time1">
+        <h3>Your Time Zone</h3>
+        <select ng-model = 'timezone'>
+          <option value=0>Pacific</option>
+          <option value=-1>Mountain</option>
+          <option value=-2>Central</option>
+          <option value=-3>Eastern</option>
         </select>
-        <select ng-options = "day for day in days" ng-model = "day1">
-        </select>
+
+        <h3>Choose your top three preferred time slots.</h3>
+
+        <div>
+        <h3>First choice</h3>
+          <select ng-options = "time.label for time in times" ng-model = "time1">
+          </select>
+          <select ng-options = "day for day in days" ng-model = "day1">
+          </select>
+        </div>
+
+        <div>
+        <h3>Second choice</h3>
+          <select ng-options = "time.label for time in times" ng-model = "time2">
+          </select>
+          <select ng-options = "day for day in days" ng-model = "day2">
+          </select>
+        </div>
+
+        <div>
+        <h3>Third choice</h3>
+          <select ng-options = "time.label for time in times" ng-model = "time3">
+          </select>
+          <select ng-options = "day for day in days" ng-model = "day3">
+          </select>
+        </div>
       </div>
-
-      <div>
-      <h3>Second choice</h3>
-        <select ng-options = "time.label for time in times" ng-model = "time2">
-        </select>
-        <select ng-options = "day for day in days" ng-model = "day2">
-        </select>
-      </div>
-
-      <div>
-      <h3>Third choice</h3>
-        <select ng-options = "time.label for time in times" ng-model = "time3">
-        </select>
-        <select ng-options = "day for day in days" ng-model = "day3">
-        </select>
-      </div>
+    <!-- spacer row -->
+    <div>p</div>
+    <div class = "row">
+          <button class="subButton" type="submit" ng-click="addUser()">Find a match!</button>
     </div>
-    <div><p></div>
-    <div class="row subRow">
-    <button type = "submit" ng-click="addUser()">Find a match!</button>
-    </div>
-  </form>
+    </form>
 </div>

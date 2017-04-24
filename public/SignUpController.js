@@ -1,6 +1,6 @@
 angular.module('app.signup', [])
 
-.controller ('SignUpController', function ($scope, $http) {
+.controller ('SignUpController', function ($scope, $http, $location) {
   $scope.user = {
     name: '',
     email: '',
@@ -49,7 +49,11 @@ angular.module('app.signup', [])
     })
     .then(function(res) {
       console.log(res.data);
-    });
+    })
+    .then(function() {
+      console.log('redirecting');
+      $location.url('/match');
+    })
   };
 
   $scope.getQuote = function() {
