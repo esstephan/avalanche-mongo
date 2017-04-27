@@ -13,6 +13,16 @@
   height: 100px;
 }
 
+/* to push down footer to bottom of page */
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 100px;
+}
+
 .footer-distributed .footer-left p{
 	color:  #8f9296;
 	font-size: 14px;

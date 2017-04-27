@@ -4,13 +4,13 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
+/* body set to 100% to allow sticky footer */
 body {
   font-family: Arial;
   background-color: #99ccff;
   background-image: url("../images/mountain-opaque.jpg");
   background-size: cover;
-  margin-bottom: 100px;
+  height: 100%;
 }
 
 h2 {
