@@ -1,7 +1,7 @@
 {
   "name": "Avalanche",
   "version": "1.0.0",
-  "description": "Make political phone calls easier by finding an online partner",
+  "description": "Take the fear out of advocacy calls with a live online support partner",
   "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,8 +17,8 @@
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "method-override": "^2.1.3",
-    "mongoose": "^4.4.12",
     "morgan": "^1.1.1",
+    "mysql": "^2.13.0",
     "pg": "^6.1.5",
     "pg-hstore": "^2.3.2",
     "q": "^1.4.1",

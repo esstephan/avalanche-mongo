@@ -3,6 +3,8 @@
 // set up ========================
 
 var express = require('express');
+// logging middleware, don't need to invoke explicitly
+var morgan = require ('morgan');
 var bodyParser = require('body-parser');
 var path = require('path');
 // fake user data for testing
