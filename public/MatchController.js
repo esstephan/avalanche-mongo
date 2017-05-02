@@ -6,14 +6,14 @@ angular.module('app.match', [])
      console.log('Getting All Users');
     return $http({
       method: 'GET',
-      url: '/api/users',
+      url: '/users',
     })
     .then(function(res) {
       $scope.users=res;
       console.log($scope.users.data);
     });
   };
-    $scope.getMatchedUsers = function() {
+  $scope.getMatchedUsers = function() {
      console.log('Getting Users Who Match Your Availability');
     return $http({
       method: 'GET',

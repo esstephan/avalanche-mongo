@@ -1,27 +1,19 @@
 angular.module('app.signup', [])
 
 .controller ('SignUpController', function ($scope, $http, $location) {
+  var userToSend;
+
   $scope.user = {
-    name: '',
     email: '',
-    password: '',
+    name: '',
     notes: '',
-    timezone: '',
-    times: [
-    {pref: 1,
-      day: $scope.day1,
-      time: $scope.time1+$scope.timezone,
-    },
-    {pref: 2,
-      day: $scope.day2,
-      time: $scope.time2+$scope.timezone,
-    },
-    {pref: 1,
-      day: $scope.day3,
-      time: $scope.time3+$scope.timezone,
-    }
-    ],
-    partner: {},
+    partner_id: null,
+    password: '',
+    room: '',
+    timezone: 0,
+    time1: 0,
+    time2: 0,
+    time3: 0,
   };
 
   // times in Pacific Time Zone, from 6am to 5pm
@@ -40,12 +32,12 @@ angular.module('app.signup', [])
   {label: "7 pm", time: 19}]
   $scope.days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
-  $scope.addUser = function(user) {
-    console.log('User clicked register', $scope.user.name);
+  $scope.addUser = function() {
+    $scope.calcTimes();
     return $http({
       method: 'POST',
       url: '/signup',
-      data: $scope.user,
+      data: userToSend,
     })
     .then(function(res) {
       console.log(res.data);
@@ -55,6 +47,16 @@ angular.module('app.signup', [])
       $location.url('/match');
     })
   };
+
+  // convert times to numbers then concatenate with day of week
+  $scope.calcTimes = function() {
+    var time1c = parseInt($scope.user.time1.time) + parseInt($scope.timezone);
+    var time2c = parseInt($scope.user.time2.time) + parseInt($scope.timezone);
+    var time3c = parseInt($scope.user.time3.time) + parseInt($scope.timezone);
+    var userTimes = [$scope.day1+time1c, $scope.day2+time2c, $scope.day3+time3c];
+    userToSend = $scope.user;
+    userToSend.times = userTimes;
+  }
 
   $scope.getQuote = function() {
     return $http({
