@@ -3,24 +3,25 @@
 // set up ========================
 
 var express = require('express');
+
 // logging middleware, don't need to invoke explicitly
 var morgan = require ('morgan');
 var bodyParser = require('body-parser');
 var path = require('path');
+
 // fake user data for testing
 var fake = require('./fake.js');
-var User = require('./users/userModel.js')
+var users = require('./controllers/userController.js')
 
-// database connection
-var db = require('../db/db.js');
-
-// create our app object and tell it to use some middleware
+// create app object and tell it to use some middleware
 var app = express();
 app.use(express.static(path.join(process.cwd(), 'public')));
 app.use(bodyParser.json());
 
-// create dummy route responses
-app.post('/signup', function(req, res) {
+// create route responses
+app.post('/signup', users.createUser);
+
+/* app.post('/signup', function(req, res) {
   var newUser = new User ({
     name: req.body.name,
     email: req.body.email,
@@ -37,6 +38,7 @@ app.post('/signup', function(req, res) {
       }
     })
 });
+*/
 
 app.get('/matches', function (req, res) {
   var currUserId = req.body._id || 0;
