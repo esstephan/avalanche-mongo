@@ -1,6 +1,5 @@
 angular.module('app.match', [])
 .controller('MatchController', function ($scope, $http) {
-  console.log("Test Match Controller invoked")
 
   $scope.getAllUsers = function() {
      console.log('Getting All Users');
