@@ -17,6 +17,10 @@ app.config(function($routeProvider, $locationProvider) {
         templateUrl: 'match.html',
         controller: 'MatchController',
       })
+      .when('/call', {
+        templateUrl: 'call.html',
+        controller: 'CallController',
+      })
       .otherwise({redirectTo: '/'});
 
   }

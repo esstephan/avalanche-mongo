@@ -39,6 +39,11 @@ html {
   font-size: 60px;
 }
 
+.phone {
+  color: red;
+  font-size: 30px;
+}
+
 .subRow {
   text-align: left;
   font: normal 16px sans-serif;

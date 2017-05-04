@@ -19,8 +19,4 @@ db/
 client/lib
 compiled/
 
-# Floobits
-.floo
-.floobit
-.floo
-.flooignore
+config.js

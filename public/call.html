@@ -1,0 +1,24 @@
+<div class = "container-fluid" ng-controller = "MatchController">
+  <div class = "row">
+    <div class = "col-md-6">
+      <h2>Your Calling Partner</h2>
+
+      <div ng-repeat="user in users|limitTo:4 track by user._id">
+        <span><h3><strong>{{user.name}}    </strong></h3>
+        <a href="mailto:"+{{user.email}} target="_top">{{user.email}}</a></span>
+        <h4>Timezone: {{user.timezone}}</h4>
+        <h4>Scheduled Call Time: {{user.timeMatch}}</h4>
+      </div>
+
+      <button ng-click="getMatchedUsers()">Refresh User Matches</button>
+    </div>
+
+    <div class = "col-md-6">
+      <iframe width="90%" id="appear"></iframe>
+      <h3 ng-show="gotRoom">Your permanent link: www.appear.in{{room}}</h3>
+
+      <button ng-click="generateVideoLink()">Get a new permanent video link</button>
+      <button ng-show="gotRoom" ng-click="saveVideoLink()">I like this one, thanks</button>
+    </div>
+  </div>
+</div>

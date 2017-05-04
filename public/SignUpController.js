@@ -43,7 +43,7 @@ angular.module('app.signup', [])
       console.log(res.data);
     })
     .then(function() {
-      console.log('redirecting');
+      $scope.getMatchedUsers();
       $location.url('/match');
     })
   };

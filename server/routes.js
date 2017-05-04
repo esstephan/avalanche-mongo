@@ -20,43 +20,8 @@ app.use(bodyParser.json());
 
 // create route responses
 app.post('/signup', users.createUser);
+app.get('/matches', users.findMatches);
 
-/* app.post('/signup', function(req, res) {
-  var newUser = new User ({
-    name: req.body.name,
-    email: req.body.email,
-    times: req.body.times,
-    timezone: req.body.timezone,
-    partner: req.body.partner,
-  });
-  newUser.save (
-    function(err, data) {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send("Created user " + req.body.name);
-      }
-    })
-});
-*/
-
-app.get('/matches', function (req, res) {
-  var currUserId = req.body._id || 0;
-  query = User.find( { "_id" : { $ne: currUserId } } );
-  User.find(function(err, users) {
-    if (err) return console.error(err);
-    console.log("sending all users");
-    res.send(users);
-  });
-});
-
-var findMatch = function(user) {
-  var match = false;
-  while (match === false);
-  for (var i=0; i < user.times.length; i++) {
-    User.findOne( {})
-  }
-}
 
 // // //save fake user
 // fake.save(function(err){

@@ -1,24 +1,22 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  //Define the User model
-  var User = sequelize.define('User', {
-    //Define the data types of the user fields
-    email: DataTypes.STRING,
-    name: DataTypes.STRING,
-    notes: DataTypes.TEXT,
-    partner_id: DataTypes.INTEGER,
-    password: DataTypes.STRING,
-    room: DataTypes.STRING,
-    times: DataTypes.ARRAY(DataTypes.STRING),
-    timezone: DataTypes.INTEGER,
-  }, {
-    //set the timestamps to be underscored: (created_at, updated_at)
-    underscored: true,
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  });
-  return User;
-};
+var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+var Schema = mongoose.Schema;
+
+var userSchema = new Schema({
+
+  email: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  notes: String,
+  partnerId: Number,
+  password: String,
+  room: String,
+  timeMatch: String,
+  times: [timeSchema],
+  timezone: Number,
+  unique: true,
+});
+
+var User = mongoose.model('User', userSchema);
+
+// make this available to our users in our Node applications
+module.exports = User;
