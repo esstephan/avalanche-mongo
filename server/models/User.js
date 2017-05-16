@@ -3,17 +3,17 @@ mongoose.Promise = require('bluebird');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-
-  email: { type: String, required: true, unique: true },
-  name: { type: String, required: true },
+  email: String,
+  name: String,
   notes: String,
   partnerId: Number,
   password: String,
   room: String,
   timeMatch: String,
-  times: [timeSchema],
+  times: [{
+    type: String
+  }],
   timezone: Number,
-  unique: true,
 });
 
 var User = mongoose.model('User', userSchema);
