@@ -13,15 +13,28 @@ angular.module('app.match', [])
     });
   };
   $scope.getMatchedUsers = function() {
-     console.log('Getting Users Who Match Your Availability');
+    console.log('Getting Users Who Match Your Availability');
     return $http({
-      method: 'GET',
+      method: 'POST',
       url: '/matches',
+      data: $scope.user,
     })
     .then(function(res) {
       console.log(res);
       $scope.users=res.data;
       console.log($scope.users);
+    });
+  };
+
+  $scope.getUserByName = function() {
+    console.log('Getting Users With That Name');
+    return $http({
+      method: 'GET',
+      url: '/matches/'+$scope.user.name,
+      name: $scope.user.name,
+    })
+    .then(function(res) {
+      console.log("response is", res.data);
     });
   };
 
