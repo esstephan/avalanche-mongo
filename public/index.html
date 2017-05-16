@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="./css/style.css">
 
     <!-- stylesheet and font for demo footer and copied header -->
-    <link rel="stylesheet" href="./css/footer-distributed.css">
+
     <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/footer-distributed.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
   </head>
@@ -31,6 +32,7 @@
 
   <script src="app.js"></script>
   <script src="SignUpController.js"></script>
+  <script src="SignUpWithFormController.js"></script>
   <script src="MatchController.js"></script>
 
   <!-- header -->
@@ -55,9 +57,10 @@
   </div>
 
   <!-- the main container to hold all the views -->
-    <div id="main" ng-view>
+    <div id="main" class="primaryView" ng-view>
 
     </div>
+
   <!-- footer -->
     <footer class="footer-distributed">
 
@@ -88,7 +91,6 @@
     </div>
 
   </footer>
-
 
   </body>
 </html>
