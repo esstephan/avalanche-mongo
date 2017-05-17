@@ -13,54 +13,74 @@ var express = require('express');
 var app = express();
 app.use(express.static(path.join(process.cwd(), 'public')));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 // authentication ================
+var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+
+// Express
 app.use(session({
-  secret: 'resist!',
+  secret: 'snowfall',
   resave: true,
   saveUninitialized: false,
 }))
 
-// passport configuration
-app.use(passport.initialize);
+// connect flash messages
+app.use(flash());
+
+// passport initialization
+app.use(passport.initialize());
 app.use(passport.session());
 
-var Account = require('./models/Account');
-passport.use(Account.createStrategy());
+passport.use(new LocalStrategy(function(username, password, done) {
+  User.findOne({ username: username }, function (err, user) {
+    if (err) {return done(err); }
+    if (!user) {
+      return done(null, false, { message: "Username does not exist"});
+    }
+    if (user.password != password) {
+      return done(null, false, { message: "Incorrect password"});
+    }
+    return done (null, user, {message: "User logged in"});
+  })
+}));
 
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
 
-// create route responses
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
-app.get ('/login', function(req, res, next) {
-  res.render('login', { user: req.user});
-})
-app.post('/login', passport.authenticate('local'), function (req, res, next) {
-  res.redirect('/call');
-})
+// route responses
+// app.post('/login', passport.authenticate('local'), function (req, res, next) {
+//   res.send("user logged in");
+// })
+
+app.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.status(401).end('no such user'); }
+
+    //If you use session, skip if you dont
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.status(200).end('user authenticated' + user.username); //That, or hand them a session id or a JWT Token
+    });
+  })(req, res, next);
+});
 
 app.post('/signup', function (req, res) {
-    console.log('req.body is', req.body);
     var newUser = User(req.body);
     newUser.save()
     .then(function(savedUser) {
-      res.render('matches', {savedUser.name + ' created'});
-    })
-    .catch(function(error) {
-      res.send('error: ', error);
-    });
-  });
-
-app.post('/signup2', function (req, res) {
-    var newUser = User(req.body);
-    newUser.times = calcTimes(req.body);
-    newUser.save()
-    .then(function(savedUser) {
-      res.send(savedUser.name + ' created');
+      res.send(savedUser.username + ' created');
     })
     .catch(function(error) {
       res.send('error: ', error);
@@ -72,7 +92,7 @@ app.get('/matches/:name', function (req, res) {
   User.findOne({'username': req.params.name}, function(err, results) {
   if (err) return handleError(err);
   console.log("found a person", results);
-  return results;
+  res.json(results);
   });
 });
 
@@ -90,10 +110,13 @@ app.get('/matches', function (req, res) {
 
   // convert times to numbers then concatenate with day of week
 var calcTimes = function(user) {
-    var time1c = parseInt(user.time1.time) + parseInt(user.timezone);
-    var time2c = parseInt(user.time2.time) + parseInt(user.timezone);
-    var time3c = parseInt(user.time3.time) + parseInt(user.timezone);
-    return [user.day1+time1c, user.day2+time2c, user.day3+time3c];
+    var time1c = user.time1 ? parseInt(user.time1.time) + parseInt(user.timezone) : null;
+    var time2c = user.time2 ? parseInt(user.time2.time) + parseInt(user.timezone) : null;
+    var time3c = user.time3 ? parseInt(user.time3.time) + parseInt(user.timezone) : null;
+    var day1 = user.day1 ? user.day1+time1c : null;
+    var day2 = user.day2 ? user.day2+time1c : null;
+    var day3 = user.day3 ? user.day3+time1c : null;
+    return [day1, day2, day3];
   }
 
 var matchInfo = function(matches, user) {
@@ -102,6 +125,7 @@ var matchInfo = function(matches, user) {
       email: match.email,
       times: match.times,
       notes: match.notes,
+      id: match.id,
     })
   });
 }
