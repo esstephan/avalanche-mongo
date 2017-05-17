@@ -14,16 +14,22 @@
       <div class = "col-md-5">
         <h2>Sign up for a partner</h2>
         <div>
-        <input type = "text" ng-model = 'user.name'>Name you would like your partner to see
+        <input type = "text" ng-model = "formData.displayname">Name you would like your partner to see
         </div>
         <div>
-        <input type = "text" ng-model = 'user.email'>Email address
+        <input type = "text" ng-model = "formData.email">Email address
         </div>
         <div>
-        <input type = "password" ng-model = 'user.password'>Password of 8 or more characters
+        <input type = "text" ng-model = "formData.username">Username
         </div>
         <div>
-        <input type = "textarea" ng-model = 'user.notes'>Notes for your partner
+        <input type = "password" ng-model = "formData.password">Password of 8 or more characters
+        </div>
+        <div>
+        <input type = "password" ng-model = "formData.password2">Confirm password
+        </div>
+        <div>
+        <input type = "textarea" ng-model = "formData.notes">Notes for your partner
         </div>
       </div>
 
@@ -44,17 +50,17 @@
 
         <div>
         <h3>First choice</h3>
-          <select ng-options = "time.label for time in times" ng-model = "user.time1">
+          <select ng-options = "time.label for time in times" ng-model = "formData.time1">
           </select>
-          <select ng-options = "day for day in days" ng-model = "day1">
+          <select ng-options = "day for day in days" ng-model = "formData.day1">
           </select>
         </div>
 
         <div>
         <h3>Second choice</h3>
-          <select ng-options = "time.label for time in times" ng-model = "user.time2">
+          <select ng-options = "time.label for time in times" ng-model = "formData.time2">
           </select>
-          <select ng-options = "day for day in days" ng-model = "day2">
+          <select ng-options = "day for day in days" ng-model = "formData.day2">
           </select>
         </div>
 
@@ -62,14 +68,14 @@
         <h3>Third choice</h3>
           <select ng-options = "time.label for time in times" ng-model = "user.time3">
           </select>
-          <select ng-options = "day for day in days" ng-model = "day3">
+          <select ng-options = "day for day in days" ng-model = "formData.day3">
           </select>
         </div>
       </div>
     <!-- spacer row -->
     <div>p</div>
     <div class = "row">
-          <button class="subButton" type="submit" ng-click="addUser()">Find a match!</button>
+          <button class="subButton" type="submit" ng-click="sendSignup()">Sign up!</button>
     </div>
     </form>
 </div>

@@ -1,19 +1,17 @@
-angular.module('app.signup', [])
+angular.module('app.signup', ['app.match'])
 
 .controller ('SignUpController', function ($scope, $http, $location) {
-  var userToSend;
-
-  $scope.user = {
-    email: '',
-    name: '',
-    notes: '',
-    partner_id: null,
-    password: '',
-    room: '',
-    timezone: 0,
-    time1: 0,
-    time2: 0,
-    time3: 0,
+  $scope.formData = {
+    displayname: undefined,
+    email: undefined,
+    username: undefined,
+    notes: undefined,
+    partnerId: undefined,
+    password: undefined,
+    room: undefined,
+    timeMatch: undefined,
+    times: undefined,
+    timezone: undefined,
   };
 
   // times in Pacific Time Zone, from 6am to 5pm
@@ -32,43 +30,28 @@ angular.module('app.signup', [])
   {label: "7 pm", time: 19}]
   $scope.days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
-  $scope.addUser = function() {
-    $scope.calcTimes();
+  $scope.sendSignup = function() {
     return $http({
       method: 'POST',
       url: '/signup',
-      data: userToSend,
+      data: $scope.formData,
     })
     .then(function(res) {
-      console.log(res.data);
-    })
-    .then(function() {
-      $scope.getMatchedUsers();
-      $location.url('/match');
-    })
-  };
-
-  // convert times to numbers then concatenate with day of week
-  $scope.calcTimes = function() {
-    var time1c = parseInt($scope.user.time1.time) + parseInt($scope.timezone);
-    var time2c = parseInt($scope.user.time2.time) + parseInt($scope.timezone);
-    var time3c = parseInt($scope.user.time3.time) + parseInt($scope.timezone);
-    var userTimes = [$scope.day1+time1c, $scope.day2+time2c, $scope.day3+time3c];
-    userToSend = $scope.user;
-    userToSend.times = userTimes;
-  }
-
-  $scope.getQuote = function() {
-    return $http({
-      method: 'GET',
-      url: 'http://quotes.rest/qod.json',
-    })
-    .then (function(res) {
       console.log(res);
-      $scope.quote = res.data.contents.quotes[0].quote;
-      $scope.quoteAuthor = res.data.contents.quotes[0].author;
-      $scope.quoted=true;
     })
   }
+
+  // $scope.getQuote = function() {
+  //   return $http({
+  //     method: 'GET',
+  //     url: 'http://quotes.rest/qod.json',
+  //   })
+  //   .then (function(res) {
+  //     console.log(res);
+  //     $scope.quote = res.data.contents.quotes[0].quote;
+  //     $scope.quoteAuthor = res.data.contents.quotes[0].author;
+  //     $scope.quoted=true;
+  //   })
+  // }
 });
 
