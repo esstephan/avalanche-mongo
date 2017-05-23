@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
+var passportLocalMongoose = require('passport-local-mongoose');
 var Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+var User = new Schema({
   displayname: String,
   email: String,
   username: String,
@@ -17,7 +17,7 @@ var userSchema = new Schema({
   timezone: Number,
 });
 
-var User = mongoose.model('User', userSchema);
+User.plugin(passportLocalMongoose);
 
 // make this available to our users in our Node applications
-module.exports = User;
+module.exports = mongoose.model('User', User);
