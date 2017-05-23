@@ -38,6 +38,7 @@ angular.module('app.signup', ['app.match'])
     })
     .then(function(res) {
       console.log(res);
+      redirectTo('/match');
     })
   }
 
