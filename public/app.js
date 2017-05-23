@@ -5,7 +5,7 @@ var AppearIn = window.AppearIn;
 var appearin = new AppearIn;
 
 
-var app = angular.module('app', ['ngRoute', 'app.signup', 'app.match', 'app.signupwithform']);
+var app = angular.module('app', ['ngRoute', 'app.signup', 'app.match', 'app.login']);
 app.config(function($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('');
     $routeProvider
@@ -13,9 +13,9 @@ app.config(function($routeProvider, $locationProvider) {
         templateUrl: 'signup.html',
         controller: 'SignUpController',
       })
-      .when('/signupWithForm', {
-        templateUrl: 'signupWithForm.html',
-        controller: 'SignUpWithFormController',
+      .when('/login', {
+        templateUrl: 'login.html',
+        controller: 'LogInController',
       })
       .when('/match', {
         templateUrl: 'match.html',
@@ -24,6 +24,10 @@ app.config(function($routeProvider, $locationProvider) {
       .when('/call', {
         templateUrl: 'call.html',
         controller: 'CallController',
+      })
+      .when('/account', {
+        templateUrl: 'account.html',
+        controller: 'AccountController',
       })
       .otherwise({redirectTo: '/'});
 
