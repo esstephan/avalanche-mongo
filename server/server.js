@@ -1,6 +1,8 @@
 // require app object and its routing
 var app = require('./routes.js');
 
+require('../server/config/passport')// pass passport for configuration
+
 // require db connection
 var db = require('./db/db.js');
 
