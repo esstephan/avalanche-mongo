@@ -20,10 +20,18 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 // authentication ================
-var flash = require('connect-flash');
 var session = require('express-session');
+var flash = require('connect-flash');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+
+// enable sessions before flash
+app.use(session({
+  secret: 'snowfall',
+}));
+
+// connect flash messages before defining local strategy
+app.use(flash());
 
 // eventually this should all live in configuration file
 passport.serializeUser(function(user, done) {
@@ -33,52 +41,57 @@ passport.deserializeUser(function(user, done) {
     done(null, user);
   });
 
-passport.use(new LocalStrategy(
-function(username, password, done) {
-  console.log("request to local strategy received");
-  User.findOne({ username: username }, function(err, user) {
-    if (err) { return done(err); }
-    if (!user) {
-      return done(null, false, { message: 'Incorrect username.' });
-    }
-    if (user.password != password) {
-      return done(null, false, { message: 'Incorrect password.' });
-    }
-    return done(null, user);
-  });
-}
+// these statements return to the app.get function via done, not to the client
+  passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { errorMsg: 'Incorrect username.' });
+      }
+      if (user.password != password) {
+        return done(null, false, { errorMsg: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
 ));
-
-// enable sessions
-app.use(session({
-  secret: 'snowfall',
-}));
 
 // passport initialization
 app.use(passport.initialize());
 app.use(passport.session());
 
-// connect flash messages
-app.use(flash());
-
-// route responses
-// app.use(function(req, res) {
-//   if (req.session && req.session.user) {
-//     User.findOne({ email: req.session.user.email }, function(err, user) {
-//       if (user) {
-//         req.user = user;
-//         delete req.user.password; // delete the password from the session
-//         req.session.user = user;  //refresh the session value
-//         res.locals.user = user;
-//       }
-//     });
-//   }
-// });
-
-app.post('/login', passport.authenticate('local'), function(req, res) {
-    console.log(req.user);
-    res.redirect('/#/match');
+app.post('/login', function (req, res, next) {
+  //first authenticate user via passport
+  passport.authenticate('local', {successRedirect: '/',
+                                  failureRedirect: '/#/login',
+                                  failureFlash: true,
+                                  successFlash: true,
+                                },
+  function(err, user, info) {
+    if (err) {
+      console.log("There was an error");
+      req.flash('errorMsg', "This is an error");
+      return next(err);
+    }
+    if (!user) {
+      console.log(info.errorMsg);
+      req.flash('errorMsg', info.errorMsg);
+      return res.redirect('/#login');
+    }
+    console.log("Successfully logged in");
+    return res.redirect('/#/call');
+    }) (req, res, next);
 });
+
+app.get('/loginTest', function(req, res) {
+  if (req.user) {
+    res.send({ answer: "yes" });
+  }
+  else {
+    res.send({ answer: "no" });
+  }
+})
 
 app.get('/logout', function(req, res) {
   req.session.reset();
@@ -122,7 +135,7 @@ app.get('/matches', function (req, res) {
       res.json(matchedUsers);
     })
     .catch(function(error) {
-      res.send('error: ', error);
+      res.send(error);
     });
   });
 
