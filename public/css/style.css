@@ -1,37 +1,37 @@
 html {
   box-sizing: border-box;
+  min-height: 100%;
+  position: relative;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
 /* body set to 100% to allow sticky footer */
 body {
-  background-color: #99ccff;
-  background-image: url("../images/mountain-opaque.jpg");
-  background-size: cover;
   font-family: Arial;
   height: 100%;
 }
 
 h2 {
-  color: white;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Pacifico';
   font-size: 30px;
 }
 
 h3 {
-  color: white;
   font-size: 20px;
 }
 
-h4 {
-  color: white;
+.imagey {
+  background-color: #99ccff;
+  background-image: url("../images/mountain-opaque.jpg");
+  background-size: cover;
 }
 
-html {
-  min-height: 100%;
-  position: relative;
+.signup {
+  background: rgba(255, 255, 255, 0.5)
 }
+
+.top-buffer { margin-top:20px; }
 
 .logo {
   color: #ffffff;
@@ -44,16 +44,24 @@ html {
   font-size: 30px;
 }
 
+.spacer {
+  margin-top: 30px;
+}
+
+.subhead {
+  text-align: center;
+}
+
 .subRow {
-  text-align: left;
+  text-align: center;
   font: normal 16px sans-serif;
 }
 
 .subButton {
-  background-color: #000000;
-  color: #ffffff;
-  margin:auto;
-  display:block;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'Pacifico', cursive;
+  font-size: 30px;
 }
 
 textarea {
@@ -62,11 +70,9 @@ textarea {
 }
 
 iframe {
-  border-top: #c00 1px dotted;
-  border-right: #c00 2px dotted;
-  border-left: #c00 2px dotted;
-  border-bottom: #c00 4px dotted;
+  border-style: solid;
+  background-image: url("../images/snowflake-background.jpg");
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   min-height: 400px;
 }

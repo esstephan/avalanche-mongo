@@ -1,11 +1,11 @@
 .header {
-	background-color: #000000;
+	background-color: #99ccff;
 	display: flex;
 	box-sizing: border-box;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	max-height: 160px;
+	max-height: 120px;
 	text-align: center;
 	margin-left: 0px;
 }
@@ -29,7 +29,7 @@
 
 .header .header-right a{
 	border-radius: 2px;
-	font-size: 20px;
+	font-size: 16px;
 	color: #ffffff;
 	padding: 10px;
 	text-decoration: none;
