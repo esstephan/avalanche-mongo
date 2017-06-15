@@ -1,87 +1,97 @@
-<div class = "container-fluid" ng-controller = "SignUpController">
-
+<div class="container-fluid imagey" ng-controller = "SignUpController">
   <!--<div><button ng-click="getQuote()">Get a Random Quote</button></div>
   <h3 ng-show="quoted">Your Quote: "{{quote}}" -- {{quoteAuthor}}</h3>-->
-
-    <div class = "row">
-    <!-- spacer column-->
-      <div class = "col-md-2"></div>
-
+    <div class="row">
+      <!-- spacer column to left of form-->
+      <div class="col-md-3"></div>
     <!--main form content-->
+      <form class="col-md-6 input-group signup form-horizontal">
+      <h2 class="subhead">Sign up for a partner</h2>
+      <div class="spacer"></div>
+          <!-- column one -->
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+              <div class="form-group row">
+                <label class="col-sm-4 control-label">Email</label>
+                <div class="col-sm-8">
+                  <input type = "text" class="form-control" placeholder="Email address" ng-model="formData.email">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 control-label">Username</label>
+                  <div class="col-sm-8">
+                    <input type = "text" class="form-control" placeholder="Name you will log in with" ng-model="formData.username">
+                  </div>
+                </div>
+              <div>
+              <div class="form-group row">
+                <label class="col-sm-4 control-label">Display Name</label>
+                <div class="col-sm-8">
+                  <input type = "text" class="form-control" placeholder="Name you would like your partner to see" ng-model="formData.displayname">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 control-label">Password</label>
+                <div class="col-sm-8">
+                  <input type = "password" class="form-control" placeholder="Password of 8 or more characters" ng-model="formData.password">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 control-label">Confirm password</label>
+                <div class="col-sm-8">
+                  <input type = "password" class="form-control" placeholder="Password of 8 or more characters" ng-model="formData.password2">
+                </div>
+              </div>
 
-      <form>
-      <!-- column one -->
-      <div class = "col-md-5">
-        <h2>Sign up for a partner</h2>
-        <div class="input-group">
-        <div>
-        <input type = "text" ng-model = "formData.displayname">Name you would like your partner to see
-        </div>
-        <div>
-        <input type = "text" ng-model = "formData.email">Email address
-        </div>
-        <div>
-        <input type = "text" ng-model = "formData.username">Username
-        </div>
-        <div>
-        <input type = "password" ng-model = "formData.password">Password of 8 or more characters
-        </div>
-        <div>
-        <input type = "password" ng-model = "formData.password2">Confirm password
-        </div>
-        <div>
-        <input type = "textarea" ng-model = "formData.notes">Notes for your partner
-        </div>
-        <!-- spacer row -->
-        <div><p></div>
-
-        <!-- submit button -->
-        <div class="row">
-          <button class="subButton" type="submit" ng-click="sendSignup()">Sign up!</button>
-        </div>
-
-        </div>
-      </div>
-
-      <!--column two -->
-      <div class = "col-md-5">
-
-        <h2>Your availability</h2>
-
-        <h3>Your Time Zone</h3>
-        <select ng-model = 'timezone'>
-          <option value=0>Pacific</option>
-          <option value=-1>Mountain</option>
-          <option value=-2>Central</option>
-          <option value=-3>Eastern</option>
-        </select>
-
-        <h3>Choose your top three preferred time slots.</h3>
-
-        <div>
-        <h3>First choice</h3>
-          <select ng-options = "time.label for time in times" ng-model = "formData.time1">
-          </select>
-          <select ng-options = "day for day in days" ng-model = "formData.day1">
-          </select>
-        </div>
-
-        <div>
-        <h3>Second choice</h3>
-          <select ng-options = "time.label for time in times" ng-model = "formData.time2">
-          </select>
-          <select ng-options = "day for day in days" ng-model = "formData.day2">
-          </select>
-        </div>
-
-        <div>
-        <h3>Third choice</h3>
-          <select ng-options = "time.label for time in times" ng-model = "user.time3">
-          </select>
-          <select ng-options = "day for day in days" ng-model = "formData.day3">
-          </select>
-        </div>
-      </div>
+            <h2 class="subhead">Your availability</h2>
+            <h4 class="subhead">Choose your top three preferred time slots</h4>
+            <div class="spacer"></div>
+            <div class="form-group row">
+            <label class="control-label col-sm-4">Your Time Zone</label>
+            <div class="col-sm-8">
+              <select ng-model = 'timezone'>
+                <option value=0>Pacific</option>
+                <option value=-1>Mountain</option>
+                <option value=-2>Central</option>
+                <option value=-3>Eastern</option>
+              </select>
+            </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 control-label">First choice</label>
+              <div class="col-sm-8">
+                <select class="form-control" ng-options = "day for day in days" ng-model="formData.day1"></select>
+                <select class="form-control" ng-options = "time.label for time in times" ng-model = "formData.time1">
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 control-label">Second choice</label>
+              <div class="col-sm-8">
+                <select class="form-control" ng-options = "day for day in days" ng-model = "formData.day2"></select>
+                <select class="form-control" ng-options = "time.label for time in times" ng-model = "formData.time2"></select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-4 control-label">Third choice</label>
+              <div class="col-sm-8">
+                <select class="form-control" ng-options = "day for day in days" ng-model = "formData.day3">
+                </select>
+                <select class="form-control" ng-options = "time.label for time in times" ng-model = "formData.time3">
+                </select>
+              </div>
+            </div>
+            <!-- submit button -->
+            <div class="form-group row subRow">
+              <button class="subButton" type="submit" ng-click="sendSignup()">Sign up!</button>
+            </div>
+            </div>
+          <div class="col-md-1"></div>
+      <!-- horizontal spacer row -->
+      <div class="row"><p></p></div>
 
     </form>
+  </div>
+  <!-- spacer column to right of form-->
+  <div class = "col-md-3"></div>
 </div>

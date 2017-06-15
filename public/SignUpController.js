@@ -28,7 +28,7 @@ angular.module('app.signup', ['app.match'])
   {label: "5 pm", time: 17},
   {label: "6 pm", time: 18},
   {label: "7 pm", time: 19}]
-  $scope.days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  $scope.days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
   $scope.sendSignup = function() {
     return $http({
@@ -42,17 +42,5 @@ angular.module('app.signup', ['app.match'])
     })
   }
 
-  // $scope.getQuote = function() {
-  //   return $http({
-  //     method: 'GET',
-  //     url: 'http://quotes.rest/qod.json',
-  //   })
-  //   .then (function(res) {
-  //     console.log(res);
-  //     $scope.quote = res.data.contents.quotes[0].quote;
-  //     $scope.quoteAuthor = res.data.contents.quotes[0].author;
-  //     $scope.quoted=true;
-  //   })
-  // }
 });
 
