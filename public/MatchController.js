@@ -1,17 +1,21 @@
 angular.module('app.match', [])
 .controller('MatchController', function ($scope, $http) {
+  $scope.user = {
+    users: [],
+  }
 
   $scope.getAllUsers = function() {
-     console.log('Getting All Users');
+    console.log('Getting All Users');
     return $http({
       method: 'GET',
-      url: '/users',
+      url: '/matches',
     })
     .then(function(res) {
       $scope.users=res;
       console.log($scope.users.data);
     });
   };
+
   $scope.getMatchedUsers = function() {
     console.log('Getting Users Who Match Your Availability');
     return $http({
