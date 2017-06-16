@@ -5,8 +5,11 @@ var path = require('path');
 
 // fake user data for testing
 var fake = require('./fake.js');
+
+// User schema
 var userQ = require('./controllers/userController.js');
 var User = require('./models/User.js');
+var jwt = require('jsonwebtoken');
 
 // create app object
 var express = require('express');
@@ -24,6 +27,9 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+
+// set a secret for JSON web token
+app.set('JSONsecret', "notSoSecret");
 
 // enable sessions before flash
 app.use(session({
@@ -63,11 +69,14 @@ app.use(passport.session());
 
 app.post('/login', function (req, res, next) {
   //first authenticate user via passport
-  passport.authenticate('local', {successRedirect: '/',
-                                  failureRedirect: '/#/login',
-                                  failureFlash: true,
-                                  successFlash: true,
-                                },
+  passport.authenticate('local',
+    // removing successRedirect since success sends a webtoken and can't send JSON and redirect in the same response
+    {
+      failureRedirect: '/#/login',
+      failureFlash: true,
+      successFlash: true,
+    },
+    //after passport sends response, handle the info
   function(err, user, info) {
     if (err) {
       console.log("There was an error");
@@ -80,7 +89,16 @@ app.post('/login', function (req, res, next) {
       return res.redirect('/#login');
     }
     console.log("Successfully logged in");
-    return res.redirect('/#/call');
+    //create JSON webtoken
+    var token = jwt.sign(user, app.get('JSONsecret'), {
+          expiresIn: 60*60*2 // expires in 2 hours
+        });
+
+    res.json({
+      success: true,
+      message: "Token sent",
+      token: token,
+    })
     }) (req, res, next);
 });
 
