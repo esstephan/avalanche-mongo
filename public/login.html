@@ -1,6 +1,6 @@
 <div class = "container-fluid" ng-controller = "LogInController">
 <h2> Sign in to your account </h2>
-<form action="/login" method="post">
+<form>
     <div>
         <label>Username:</label>
         <input type="text" name="username" ng-model="userdata.username"/>
@@ -12,5 +12,7 @@
     <div>
         <input type="submit" value="Log In" ng-click="userLogin()"/>
     </div>
+    <button ng-click="testLogin()">Check Logged In</button>
 </form>
+
 </div>
