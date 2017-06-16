@@ -11,7 +11,17 @@ angular.module('app.login', [])
     data: $scope.userdata,
   })
   .then(function(res) {
-    console.log("response received");
+    console.log(res);
+  })
+}
+
+$scope.testLogin = function() {
+  return $http({
+    method: 'GET',
+    url: '/loginTest',
+  }).
+  then(function(res) {
+    console.log('answer is', res.data.answer);
   })
 }
 
