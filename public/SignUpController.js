@@ -1,6 +1,6 @@
 angular.module('app.signup', ['app.match'])
 
-.controller ('SignUpController', function ($scope, $http, $location) {
+.controller ('SignUpController', function ($scope, $rootScope, $http, $location) {
   $scope.formData = {
     displayname: undefined,
     email: undefined,
@@ -36,9 +36,9 @@ angular.module('app.signup', ['app.match'])
       url: '/signup',
       data: $scope.formData,
     })
-    .then(function(res) {
-      console.log(res);
-      redirectTo('/match');
+  .then(function(res) {
+      console.log("Signed up ", res.data);
+      $rootScope.loggedIn = true;
     })
   }
 

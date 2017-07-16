@@ -11,7 +11,12 @@ angular.module('app.login', [])
     data: $scope.userdata,
   })
   .then(function(res) {
-    console.log(res);
+    var currentUser = {};
+    currentUser.firstName = res.data.name;
+    currentUser.times = res.data.times;
+    currentUser.match = res.data.match;
+    window.localStorage.currentUser = currentUser;
+    console.log(window.localStorage);
   })
 }
 

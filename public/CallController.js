@@ -6,4 +6,9 @@ angular.module('app.call', [])
   console.log("Your Room", $scope.room);
   appearin.addRoomToElementById("appear", $scope.room);
 
+  function logUserOut($rootScope){
+    $rootScope.loggedin = false;
+    console.log("logged out", $rootScope);
+  };
+
 })

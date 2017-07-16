@@ -1,18 +1,20 @@
 angular.module('app.match', [])
 .controller('MatchController', function ($scope, $http) {
   $scope.user = {
-    users: [],
+    matches: [],
+    loggedIn: false,
   }
 
-  $scope.getAllUsers = function() {
-    console.log('Getting All Users');
+  $scope.testLogin = function() {
+    console.log('Are you logged in');
     return $http({
       method: 'GET',
-      url: '/matches',
+      url: '/loginTest',
     })
     .then(function(res) {
-      $scope.users=res;
-      console.log($scope.users.data);
+      $scope.loggedIn=res.data;
+      console.log(res);
+      console.log($scope.loggedIn);
     });
   };
 
