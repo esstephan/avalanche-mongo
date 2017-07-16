@@ -1,73 +1,11 @@
-// logging middleware, don't need to invoke explicitly
-var morgan = require ('morgan');
-var bodyParser = require('body-parser');
-var path = require('path');
+var express= require('express');
 
-// fake user data for testing
-var fake = require('./fake.js');
+module.exports = function(passport) {
 
-// User schema
-var userQ = require('./controllers/userController.js');
-var User = require('./models/User.js');
-var jwt = require('jsonwebtoken');
+var routes = express.Router();
 
-// create app object
-var express = require('express');
-var app = express();
-
-// load static resources before session middleware
-app.use(express.static(path.join(process.cwd(), 'public')));
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
-
-app.use(morgan('dev'));
-
-// authentication ================
-var session = require('express-session');
-var flash = require('connect-flash');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-
-// set a secret for JSON web token
-app.set('JSONsecret', "notSoSecret");
-
-// enable sessions before flash
-app.use(session({
-  secret: 'snowfall',
-}));
-
-// connect flash messages before defining local strategy
-app.use(flash());
-
-// eventually this should all live in configuration file
-passport.serializeUser(function(user, done) {
-    done(null, user);
-  });
-passport.deserializeUser(function(user, done) {
-    done(null, user);
-  });
-
-// these statements return to the app.get function via done, not to the client
-  passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { errorMsg: 'Incorrect username.' });
-      }
-      if (user.password != password) {
-        return done(null, false, { errorMsg: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
-
-// passport initialization
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.post('/login', function (req, res, next) {
+routes.post('/login', function (req, res, next) {
+  console.log("Got login request from client");
   //first authenticate user via passport
   passport.authenticate('local',
     // removing successRedirect since success sends a webtoken and can't send JSON and redirect in the same response
@@ -90,10 +28,8 @@ app.post('/login', function (req, res, next) {
     }
     console.log("Successfully logged in");
     //create JSON webtoken
-    var token = jwt.sign(user, app.get('JSONsecret'), {
-          expiresIn: 60*60*2 // expires in 2 hours
-        });
-
+    var token = user.generateJWT();
+    console.log(token);
     res.json({
       success: true,
       message: "Token sent",
@@ -102,7 +38,7 @@ app.post('/login', function (req, res, next) {
     }) (req, res, next);
 });
 
-app.get('/loginTest', function(req, res) {
+routes.get('/loginTest', function(req, res) {
   if (req.user) {
     res.send({ answer: "yes" });
   }
@@ -111,12 +47,12 @@ app.get('/loginTest', function(req, res) {
   }
 })
 
-app.get('/logout', function(req, res) {
+routes.get('/logout', function(req, res) {
   req.session.reset();
   res.redirect('/#/signup');
 });
 
-app.post('/signup', function (req, res) {
+routes.post('/signup', function (req, res) {
     User.findOne({username: req.body.username}, function(err, user) {
       if(user) {
         res.send("That username is taken");
@@ -136,7 +72,7 @@ app.post('/signup', function (req, res) {
     });
 });
 
-app.get('/matches/:name', function (req, res) {
+routes.get('/matches/:name', function (req, res) {
   console.log("Request received to matches/:name", req.params.name);
   User.findOne({'username': req.params.name}, function(err, results) {
   if (err) return handleError(err);
@@ -145,12 +81,15 @@ app.get('/matches/:name', function (req, res) {
   });
 });
 
-app.get('/matches', function (req, res) {
+routes.post('/matches', function (req, res) {
   console.log("Request received to matches/");
-    User.find({ times: { $in: req.body.times } })
-    .then(function(matches) {
-      var matchedUsers = matchInfo(matches, req.body);
-      res.json(matchedUsers);
+    User.findOne({ times: { $in: req.body.times } })
+    .then(function(match) {
+      var matchedUserInfo = matchInfo(match);
+      currentUser.match = match;
+      match.match = currentUser;
+
+      res.json(matchedUserInfo);
     })
     .catch(function(error) {
       res.send(error);
@@ -168,15 +107,13 @@ var calcTimes = function(user) {
     return [day1, day2, day3];
   };
 
-var matchInfo = function(matches, user) {
-  return matches.map(function(match) {
+var matchInfo = function(match) {
     return ({name: match.name,
       email: match.email,
       times: match.times,
       notes: match.notes,
       id: match.id,
     })
-  });
-};
+  };
 
-module.exports = app;
+}
