@@ -1,6 +1,21 @@
 <div class="container-fluid imagey" ng-controller = "SignUpController">
-  <!--<div><button ng-click="getQuote()">Get a Random Quote</button></div>
-  <h3 ng-show="quoted">Your Quote: "{{quote}}" -- {{quoteAuthor}}</h3>-->
+
+  <!-- header -->
+  <div class="header">
+    <div class="header-left">
+    </div>
+    <div class="header-center">
+    <p class = "logo">Avalanche</p>
+    </div>
+    <div class="header-right">
+      <a href="#/login">Sign In</a>
+      <a href="#/signup">Sign Up</a>
+      <a href="#/match">Find A Match</a>
+      <a href="#/call">Make a Call</a>
+      <button id="logout">Logout</button>
+    </div>
+  </div>
+
     <div class="row">
       <!-- spacer column to left of form-->
       <div class="col-md-3"></div>
@@ -83,7 +98,7 @@
             </div>
             <!-- submit button -->
             <div class="form-group row subRow">
-              <button class="subButton" type="submit" ng-click="sendSignup()">Sign up!</button>
+              <button class="subButton" type="submit" ng-click="sendSignup()">Get a Partner!</button>
             </div>
             </div>
           <div class="col-md-1"></div>

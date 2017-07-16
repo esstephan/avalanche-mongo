@@ -1,7 +1,25 @@
 <div class = "container-fluid" ng-controller = "MatchController">
+
+  <!-- header -->
+  <div class="header">
+    <div class="header-left">
+    </div>
+    <div class="header-center">
+    <p class = "logo">Avalanche</p>
+    </div>
+    <div class="header-right">
+      <a href="#/login">Sign In</a>
+      <a href="#/signup">Sign Up</a>
+      <a href="#/match">Find A Match</a>
+      <a href="#/call">Make a Call</a>
+      <button id="logout">Logout</button>
+    </div>
+  </div>
+
   <div class = "row">
   <div class="col-md-1"></div>
     <div class = "col-md-5">
+      <div>Welcome {{user.firstName}}</div>
       <h2>Your Calling Partners:</h2>
       <div class="row spacer"></div>
       <div ng-repeat="user in users|limitTo:4 track by id">
@@ -15,6 +33,7 @@
       <div>
         <div>
           <button ng-click="getAllUsers()">Refresh User Matches</button>
+          <button ng-click="testLogin()">Test if you are logged in</button>
         </div>
 
       </div>
