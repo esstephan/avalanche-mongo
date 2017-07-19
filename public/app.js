@@ -4,7 +4,6 @@
 var AppearIn = window.AppearIn;
 var appearin = new AppearIn;
 
-
 var app = angular.module('app', ['ngRoute', 'app.signup', 'app.match', 'app.login', 'app.call']);
 app.config(function($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('');
@@ -30,7 +29,10 @@ app.config(function($routeProvider, $locationProvider) {
         controller: 'AccountController',
       })
       .otherwise({redirectTo: '/'});
-
-  }
+    }
 );
+
+
+
+
 
