@@ -1,7 +1,7 @@
 {
   "name": "Avalanche",
   "version": "1.0.0",
-  "description": "Take the fear out of advocacy calls with a live online support partner",
+  "description": "A workout buddy for your activism",
   "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/esstephan/phone-friend.git"
+    "url": "git+https://github.com/esstephan/avalanche-mongo.git"
   },
   "dependencies": {
     "angular": "^1.6.1",
     "angular-route": "^1.4.8",
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
-    "client-sessions": "^0.8.0",
     "connect-flash": "^0.1.1",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
@@ -26,6 +26,7 @@
     "morgan": "^1.1.1",
     "passport": "^0.3.2",
     "passport-http": "^0.3.0",
+    "passport-json": "^1.2.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
     "q": "^1.4.1"
