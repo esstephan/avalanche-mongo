@@ -1,18 +1,19 @@
 angular.module('app.signup', ['app.match'])
 
 .controller ('SignUpController', function ($scope, $rootScope, $http, $location) {
-  $scope.formData = {
-    displayname: undefined,
-    email: undefined,
-    username: undefined,
-    notes: undefined,
-    partnerId: undefined,
-    password: undefined,
-    room: undefined,
-    timeMatch: undefined,
-    times: undefined,
-    timezone: undefined,
-  };
+  // $scope.formData = {
+  //   firstName: undefined,
+  //   lastName: undefined,
+  //   email: undefined,
+  //   username: undefined,
+  //   notes: undefined,
+  //   partnerId: undefined,
+  //   password: undefined,
+  //   room: undefined,
+  //   timeMatch: undefined,
+  //   times: undefined,
+  //   timezone: undefined,
+  // };
 
   // times in Pacific Time Zone, from 6am to 5pm
   $scope.times = [{label: "7 am", time: 7},
@@ -34,13 +35,29 @@ angular.module('app.signup', ['app.match'])
     return $http({
       method: 'POST',
       url: '/signup',
+      headers: {
+        "Content-Type": "application/json"
+      },
       data: $scope.formData,
     })
   .then(function(res) {
-      console.log("Signed up ", res.data);
-      $rootScope.loggedIn = true;
+    console.log('times are', res.data.times);
+      console.log("Signed up ", res.data.firstName);
+      localStorage.setItem('currentUser', JSON.stringify(res.data));
     })
   }
+
+  $scope.logUserOut = function(){
+    console.log("logout button pressed");
+    return $http({
+      method: 'POST',
+      url: '/logout',
+    })
+    .then(function(res) {
+      window.localStorage.setItem('currentUser', null);
+      console.log("logged out");
+    });
+  };
 
 });
 
