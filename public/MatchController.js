@@ -1,34 +1,21 @@
 angular.module('app.match', [])
-.controller('MatchController', function ($scope, $http) {
-  $scope.user = {
-    matches: [],
-    loggedIn: false,
-  }
-
-  $scope.testLogin = function() {
-    console.log('Are you logged in');
-    return $http({
-      method: 'GET',
-      url: '/loginTest',
-    })
-    .then(function(res) {
-      $scope.loggedIn=res.data;
-      console.log(res);
-      console.log($scope.loggedIn);
-    });
-  };
+.controller('MatchController', function ($scope, $rootScope, $http) {
 
   $scope.getMatchedUsers = function() {
     console.log('Getting Users Who Match Your Availability');
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
     return $http({
       method: 'POST',
       url: '/matches',
-      data: $scope.user,
+      data: currentUser,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      withCredentials: true,
     })
     .then(function(res) {
       console.log(res);
-      $scope.users=res.data;
-      console.log($scope.users);
+      //localStorage.setItem('matchedUser', JSON.stringify(res.data))
     });
   };
 
@@ -52,8 +39,18 @@ angular.module('app.match', [])
       $scope.room=roomName;
       $scope.gotRoom=true;
     });
-
     // then update database for both parties with new room name;
   }
+
+  $scope.logUserOut = function(){
+    return $http({
+      method: 'POST',
+      url: '/logout',
+    })
+    .then(function(res) {
+      $rootScope.loggedin = false;
+      console.log("logged out", $rootScope);
+    });
+  };
 
 })
