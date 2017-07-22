@@ -14,8 +14,8 @@ angular.module('app.match', [])
       withCredentials: true,
     })
     .then(function(res) {
-      console.log(res);
-      //localStorage.setItem('matchedUser', JSON.stringify(res.data))
+      console.log('your match', res.data);
+      localStorage.setItem('matchedUser', JSON.stringify(res.data))
     });
   };
 
