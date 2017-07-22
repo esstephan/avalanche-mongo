@@ -28,6 +28,8 @@ var User = require('./models/User.js');
 // enable sessions before flash
 app.use(session({
   secret: 'snowfall',
+  saveUninitialized: true,
+  resave: true,
 }));
 
 //initialize passport
@@ -49,8 +51,10 @@ passport.deserializeUser(function(id, done) {
   });
 
 // these statements return to the app.get function via done, not to the client
-passport.use('login', new LocalStrategy(
-  function(username, password, done) {
+passport.use('login', new LocalStrategy({
+  passReqToCallback: true,
+  },
+  function(req, username, password, done) {
     console.log('username is', username);
     User.findOne({ username: username }, function(err, user) {
       if (err) { return done(err); }
@@ -60,6 +64,10 @@ passport.use('login', new LocalStrategy(
       if (!isValidPassword(user, password)) {
         return done(null, false, flash('message', 'Wrong password'));
       };
+      req.session.userid = user._id;
+      req.session.times = user.times;
+      req.session.save();
+      console.log('User registration successful');
       return done(null, user, flash('message', "success!"));
     });
   }
@@ -98,6 +106,10 @@ passport.use('signup', new LocalStrategy({
             console.log('Error saving user', err);
             return done(null, false);
           }
+          //add user info to the session
+          req.session.userid = newUser._id;
+          req.session.times = newUser.times;
+          req.session.save();
           console.log('User registration successful');
           return done(null, newUser);
         });
@@ -114,6 +126,7 @@ app.post('/login', function (req, res, next) {
   passport.authenticate('login',
     //after passport sends response, handle the info
   function(err, user, info) {
+    console.log('user is', user);
     if (err) {
       console.log("There was an error");
       return next(err);
@@ -122,15 +135,12 @@ app.post('/login', function (req, res, next) {
       console.log(info.errorMsg);
       return res.redirect('/#login');
     } else {
-      console.log('no error');
-      console.log(user);
-      var currentUser = {};
-      currentUser.firstName = user.firstName || "Friend";
-      currentUser.times = user.times;
-      currentUser.match = user.match;
-      currentUser.room = user.room;
-      console.log("current User is", currentUser);
-      res.status(200).json(currentUser);
+      var currentUser = {
+        firstName: user.firstName,
+        times: user.times,
+        match: user.match,
+      }
+      res.status(200).json(user);
     }
   })(req, res, next);
 });
@@ -162,25 +172,43 @@ app.get('/matches/:name', function (req, res) {
 });
 
 app.post('/matches', function (req, res) {
+  console.log('session data', req.session);
   // find user with matching times that isn't requester
   // update that user with requester as match
   // find requesting user
   // update requester with match
-  console.log("req.body is", req.body);
-  User.findOne({'times': { $in: req.body.times } })
-  .exec(function(err, match) {
-    console.log("match is", match);
+  var userTimes = req.body.times;
+  console.log("current user times", userTimes);
+  User.findOne({'times': { $in: userTimes } })
+  .exec(function(err, user) {
+    // once a match is found:
+    // set matcheduser variable to the matched user
+    var matchedUser = user;
+    //find the logged in user in database
+    User.findOne( {_id: req.body._id })
+    .exec(function(err, user) {
+      if (err) {
+        console.log('error finding original user');
+      } else {
+        //assign the matched user to the logged in user
+        user.match = matchedUser;
+        //update the logged in user
+        user.save();
+        //assign the logged in user to the matched user
+        matchedUser.match = user;
+        matchedUser.save();
+        console.log("logged in user", user);
+        console.log("matched user", matchedUser);
+        //send back selected about match
+        var matchInfo = {
+          firstName : matchedUser.firstName,
+          timezone : matchedUser.timezone,
+          email : matchedUser.email,
+        }
+        res.json(matchInfo);
+      }
+    });
   })
-
-  // console.log('currentUser is', currentUser);
-  // var match = User.findOne({ times: { $in: req.body.times } });
-  // var matchedUserInfo = matchInfo(match);
-  // console.log("your match is", matchedUserInfo);
-  // currentUser.match = match;
-  // match.match = currentUser;
-  // currentUser.save();
-  // match.save();
-  // sendResponse(200, matchedUserInfo);
 });
 
 var sendResponse = function(status, content) {
